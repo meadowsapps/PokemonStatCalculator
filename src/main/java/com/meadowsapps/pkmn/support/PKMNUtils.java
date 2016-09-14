@@ -879,9 +879,9 @@ public class PKMNUtils {
         String[] natures = new String[25];
 
         try {
-            //File file = new File(PKMNUtils.class.getClassLoader().getResource("resources/nature_modifiers.txt").getPath());
+            //File file = new File(PKMNUtils.class.getClassLoader().getResource("resources/modifiers.txt").getPath());
             //FileReader fileReader = new FileReader(file);
-            InputStream inputStream = PKMNUtils.class.getClassLoader().getResourceAsStream("nature_modifiers.txt");
+            InputStream inputStream = PKMNUtils.class.getClassLoader().getResourceAsStream("modifiers.txt");
             InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
             BufferedReader reader = new BufferedReader(inputStreamReader);
 

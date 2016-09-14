@@ -39,7 +39,7 @@ public enum Nature {
     private static HashMap<Nature, Double[]> modifiers = new HashMap<Nature, Double[]>();
 
     static {
-        InputStream stream = Nature.class.getClassLoader().getResourceAsStream("nature_modifiers.txt");
+        InputStream stream = Nature.class.getClassLoader().getResourceAsStream("modifiers.txt");
         InputStreamReader streamReader = new InputStreamReader(stream);
         BufferedReader reader = new BufferedReader(streamReader);
 
