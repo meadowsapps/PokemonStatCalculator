@@ -19,7 +19,7 @@ public class Pokemon {
 
     public Pokemon() {
         this.level = 50;
-        this.nature = Nature.ADAMANT;
+        this.nature = Nature.Adamant;
     }
 
     public String getName() {
