@@ -6,7 +6,9 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,6 +18,8 @@ import java.util.regex.Pattern;
 public abstract class DataTable {
 
     private static PokemonTable pokemonTable = new PokemonTable();
+
+    private static FormTable formTable = new FormTable();
 
     private static BaseStatTable baseStatTable = new BaseStatTable();
 
@@ -41,6 +45,10 @@ public abstract class DataTable {
         return pokemonTable;
     }
 
+    public static FormTable getFormTable() {
+        return formTable;
+    }
+
     public static BaseStatTable getBaseStatTable() {
         return baseStatTable;
     }
@@ -51,9 +59,9 @@ public abstract class DataTable {
 
     public static class PokemonTable extends DataTable {
 
-        private String[] pokemon;
+        private List<String> pokemon;
 
-        public static final int NUMBER_OF_POKEMON = 721;
+        private final String[] EMPTY_ARRAY = new String[0];
 
         private PokemonTable() {
             super("pokemon.txt");
@@ -62,11 +70,11 @@ public abstract class DataTable {
         @Override
         protected void process(String contents) {
             long start = System.currentTimeMillis();
-            pokemon = new String[NUMBER_OF_POKEMON];
+            pokemon = new ArrayList<String>();
             int counter = 0;
             String[] lines = contents.split("\n");
             for (String line : lines) {
-                pokemon[counter] = line.trim();
+                pokemon.add(line.trim());
                 counter++;
             }
             long stop = System.currentTimeMillis();
@@ -74,11 +82,58 @@ public abstract class DataTable {
         }
 
         public String[] getPokemon() {
-            return pokemon;
+            return pokemon.toArray(EMPTY_ARRAY);
         }
 
         public String getPokemon(int dexNumber) {
-            return pokemon[dexNumber - 1];
+            return pokemon.get(dexNumber - 1);
+        }
+
+        public int getDexNumber(String pokemon) {
+            int rv = this.pokemon.indexOf(pokemon);
+            if (rv != -1) {
+                rv++;
+            }
+            return rv;
+        }
+    }
+
+    public static class FormTable extends DataTable {
+
+        private HashMap<Integer, String[]> forms;
+
+        private FormTable() {
+            super("forms.txt");
+        }
+
+        @Override
+        protected void process(String contents) {
+            this.forms = new HashMap<Integer, String[]>();
+            Pattern pattern = Pattern.compile("\\d+:\\{([^\\*])+?\\},*");
+            Matcher matcher = pattern.matcher(contents);
+            while (matcher.find()) {
+                String entry = contents.substring(matcher.start(), matcher.end());
+                String[] kv = entry.split(":");
+                int key = Integer.parseInt(kv[0]);
+
+                List<String> forms = new ArrayList<String>();
+                int start = kv[1].indexOf('{') + 1;
+                int end = kv[1].lastIndexOf('}');
+                String[] formEntries = kv[1].substring(start, end).trim().split(",");
+                for (String formEntry : formEntries) {
+                    forms.add(formEntry.trim());
+                }
+                String[] array = new String[forms.size()];
+                this.forms.put(key, forms.toArray(array));
+            }
+        }
+
+        public String[] getForms(int index) {
+            String[] forms = new String[0];
+            if (this.forms.containsKey(index)) {
+                forms = this.forms.get(index);
+            }
+            return forms;
         }
     }
 

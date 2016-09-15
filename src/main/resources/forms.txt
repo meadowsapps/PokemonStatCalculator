@@ -1,0 +1,744 @@
+3:{
+	Male,
+	Female,
+	Mega
+},
+6:{
+    ,
+	Mega X,
+	Mega Y
+},
+9:{
+    ,
+	Mega
+},
+12:{
+	Male,
+	Female
+},
+15:{
+    ,
+	Mega
+},
+18:{
+    ,
+	Mega
+},
+19:{
+	Male,
+	Female
+},
+20:{
+	Male,
+	Female
+},
+25:{
+	Male,
+	Female,
+	Cosplay
+},
+26:{
+	Male,
+	Female
+},
+41:{
+	Male,
+	Female
+},
+42:{
+	Male,
+	Female
+},
+44:{
+	Male,
+	Female
+},
+45:{
+	Male,
+	Female
+},
+64:{
+	Male,
+	Female
+},
+65:{
+	Male,
+	Female,
+	Mega
+},
+80:{
+    ,
+	Mega
+},
+84:{
+	Male,
+	Female
+},
+85:{
+	Male,
+	Female
+},
+94:{
+    ,
+	Mega
+},
+97:{
+	Male,
+	Female
+},
+111:{
+	Male,
+	Female
+},
+112:{
+	Male,
+	Female
+},
+115:{
+    ,
+	Mega
+},
+118:{
+	Male,
+	Female
+},
+119:{
+	Male,
+	Female
+},
+123:{
+	Male,
+	Female
+},
+127:{
+    ,
+	Mega
+},
+129:{
+	Male,
+	Female
+},
+130:{
+	Male,
+	Female,
+	Mega
+},
+142:{
+    ,
+	Mega
+},
+150:{
+    ,
+	Mega X,
+	Mega Y
+},
+154:{
+	Male,
+	Female
+},
+165:{
+	Male,
+	Female
+},
+166:{
+	Male,
+	Female
+},
+178:{
+	Male,
+	Female
+},
+181:{
+    ,
+	Mega
+},
+185:{
+	Male,
+	Female
+},
+186:{
+	Male,
+	Female
+},
+190:{
+	Male,
+	Female
+},
+194:{
+	Male,
+	Female
+},
+195:{
+	Male,
+	Female
+},
+198:{
+	Male,
+	Female
+},
+201:{
+	A,
+	B,
+	C,
+	D,
+	E,
+	F,
+	G,
+	H,
+	I,
+	J,
+	K,
+	L,
+	M,
+	N,
+	O,
+	P,
+	Q,
+	R,
+	S,
+	T,
+	U,
+	V,
+	W,
+	X,
+	Y,
+	Z,
+	?,
+	!
+},
+202:{
+	Male,
+	Female
+},
+203:{
+	Male,
+	Female
+},
+207:{
+	Male,
+	Female
+},
+208:{
+	Male,
+	Female,
+	Mega
+},
+212:{
+	Male,
+	Female,
+	Mega
+},
+214:{
+	Male,
+	Female,
+	Mega
+},
+215:{
+	Male,
+	Female
+},
+217:{
+	Male,
+	Female
+},
+221:{
+	Male,
+	Female
+},
+224:{
+	Male,
+	Female
+},
+229:{
+	Male,
+	Female,
+	Mega
+},
+232:{
+	Male,
+	Female
+},
+248:{
+    ,
+	Mega
+},
+254:{
+    ,
+	Mega
+},
+255:{
+	Male,
+	Female
+},
+256:{
+	Male,
+	Female
+},
+257:{
+	Male,
+	Female,
+	Mega
+},
+260:{
+    ,
+	Mega
+},
+267:{
+	Male,
+	Female
+},
+269:{
+	Male,
+	Female
+},
+272:{
+	Male,
+	Female
+},
+274:{
+	Male,
+	Female
+},
+275:{
+	Male,
+	Female
+},
+282:{
+    ,
+	Mega
+},
+302:{
+    ,
+	Mega
+},
+303:{
+    ,
+	Mega
+},
+306:{
+    ,
+	Mega
+},
+307:{
+	Male,
+	Female
+},
+308:{
+	Male,
+	Female,
+	Mega
+},
+310:{
+    ,
+	Mega
+},
+315:{
+	Male,
+	Female
+},
+316:{
+	Male,
+	Female
+},
+317:{
+	Male,
+	Female
+},
+319:{
+    ,
+	Mega
+},
+322:{
+	Male,
+	Female
+},
+323:{
+	Male,
+	Female,
+	Mega
+},
+332:{
+	Male,
+	Female
+},
+334:{
+    ,
+	Mega
+},
+350:{
+	Male,
+	Female
+},
+351:{
+	Normal,
+	Rainy,
+	Snowy,
+	Sunny
+},
+354:{
+    ,
+	Mega
+},
+359:{
+    ,
+	Mega
+},
+362:{
+    ,
+	Mega
+},
+369:{
+	Male,
+	Female
+},
+373:{
+    ,
+	Mega
+},
+376:{
+    ,
+	Mega
+},
+380:{
+    ,
+	Mega
+},
+381:{
+    ,
+	Mega
+},
+382:{
+    ,
+	Primal
+},
+383:{
+    ,
+	Primal
+},
+384:{
+    ,
+	Mega
+},
+386:{
+	Normal,
+	Attack,
+	Defense,
+	Speed
+},
+396:{
+	Male,
+	Female
+},
+397:{
+	Male,
+	Female
+},
+398:{
+	Male,
+	Female
+},
+399:{
+	Male,
+	Female
+},
+400:{
+	Male,
+	Female
+},
+401:{
+	Male,
+	Female
+},
+402:{
+	Male,
+	Female
+},
+403:{
+	Male,
+	Female
+},
+404:{
+	Male,
+	Female
+},
+405:{
+	Male,
+	Female
+},
+407:{
+	Male,
+	Female
+},
+412:{
+	Plant,
+	Sandy,
+	Trash
+},
+413:{
+	Plant,
+	Sandy,
+	Trash
+},
+415:{
+	Male,
+	Female
+},
+417:{
+	Male,
+	Female
+},
+418:{
+	Male,
+	Female
+},
+419:{
+	Male,
+	Female
+},
+421:{
+    Overcast,
+	Sunshine
+},
+422:{
+	East,
+	West
+},
+423:{
+	East,
+	West
+},
+424:{
+	Male,
+	Female
+},
+428:{
+    ,
+	Mega
+},
+443:{
+	Male,
+	Female
+},
+444:{
+	Male,
+	Female
+},
+445:{
+	Male,
+	Female,
+	Mega
+},
+448:{
+    ,
+	Mega
+},
+449:{
+	Male,
+	Female
+},
+450:{
+	Male,
+	Female
+},
+453:{
+	Male,
+	Female
+},
+454:{
+	Male,
+	Female
+},
+456:{
+	Male,
+	Female
+},
+457:{
+	Male,
+	Female
+},
+459:{
+	Male,
+	Female
+},
+460:{
+	Male,
+	Female,
+	Mega
+},
+461:{
+	Male,
+	Female
+},
+464:{
+	Male,
+	Female
+},
+465:{
+	Male,
+	Female
+},
+473:{
+	Male,
+	Female
+},
+475:{
+    ,
+	Mega
+},
+479:{
+	Normal,
+	Fan,
+	Frost,
+	Heat,
+	Mow,
+	Wash
+},
+487:{
+	Altered,
+	Origin
+},
+492:{
+	Land,
+	Sky
+},
+521:{
+	Male,
+	Female
+},
+531:{
+    ,
+	Mega
+},
+550:{
+	Blue,
+	Red
+},
+555:{
+	Standard,
+	Zen
+},
+585:{
+	Autumn,
+	Spring,
+	Summer,
+	Winter
+},
+586:{
+	Autumn,
+	Spring,
+	Summer,
+	Winter
+},
+592:{
+	Male,
+	Female
+},
+593:{
+	Male,
+	Female
+},
+641:{
+	Incarnate,
+	Therian
+},
+642:{
+	Incarnate,
+	Therian
+},
+645:{
+	Incarnate,
+	Therian
+},
+646:{
+	Black,
+	White
+},
+647:{
+	Ordinary,
+	Resolute
+},
+648:{
+	Aria,
+	Pirouette
+},
+666:{
+	Archipelago,
+	Continental,
+	Elegant,
+	Fancy,
+	Garden,
+	High,
+	Icy,
+	Jungle,
+	Marine,
+	Meadow,
+	Modern,
+	Monsoon,
+	Ocean,
+	Plains,
+	Pokeball,
+	Polar,
+	River,
+	Sandstorm,
+	Savannah,
+	Snow,
+	Sun,
+	Tundra
+},
+668:{
+	Male,
+	Female
+},
+669:{
+	Blue,
+	Orange,
+	Red,
+	White,
+	Yellow
+},
+670:{
+	Blue,
+	Orange,
+	Red,
+	White,
+	Yellow
+},
+671:{
+	Blue,
+	Orange,
+	Red,
+	White,
+	Yellow
+},
+678:{
+	Male,
+	Female
+},
+681:{
+	Shield,
+	Blade
+},
+710:{
+	Small,
+	Average,
+	Large,
+	Super
+},
+711:{
+	Small,
+	Average,
+	Large,
+	Super
+},
+716:{
+	Neutral,
+	Active
+},
+719:{
+    ,
+	Mega
+},
+720:{
+	Confined,
+	Unbound
+}
