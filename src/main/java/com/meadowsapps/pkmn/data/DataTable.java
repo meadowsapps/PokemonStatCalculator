@@ -1,4 +1,4 @@
-package com.meadowsapps.pkmn;
+package com.meadowsapps.pkmn.data;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,9 +6,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -217,6 +215,13 @@ public abstract class DataTable {
             }
             long stop = System.currentTimeMillis();
             System.out.println("Nature Table: " + (stop - start));
+        }
+
+        public String[] getNatures() {
+            Set<String> natures = this.natures.keySet();
+            List<String> naturesList = new ArrayList<String>(natures);
+            Collections.sort(naturesList);
+            return naturesList.toArray(new String[0]);
         }
 
         public Double[] getModifier(Nature nature) {

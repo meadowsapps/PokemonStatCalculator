@@ -1,4 +1,4 @@
-package com.meadowsapps.pkmn;
+package com.meadowsapps.pkmn.data;
 
 /**
  * Created by dmeadows on 2/12/15

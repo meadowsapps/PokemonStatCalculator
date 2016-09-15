@@ -1,4 +1,4 @@
-package com.meadowsapps.pkmn;
+import com.meadowsapps.pkmn.data.DataTable;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 
 /**
  * Created by dmeadows on 9/15/16.

@@ -1,4 +1,4 @@
-import com.meadowsapps.pkmn.DataTable;
+import com.meadowsapps.pkmn.data.DataTable;
 
 import java.io.File;
 import java.net.URL;
