@@ -1,4 +1,4 @@
-package com.meadowsapps.pkmn;
+package com.meadowsapps.pkmn.ui;
 
 import com.meadowsapps.pkmn.data.DataTable;
 import javafx.beans.value.ChangeListener;
@@ -12,7 +12,6 @@ import javafx.scene.control.Separator;
 import javafx.scene.control.Spinner;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Font;
 
 /**
  * Created by Dylan on 9/15/16.
@@ -39,26 +38,16 @@ public class InfoView extends AnchorPane implements ChangeListener {
         GridPane layoutPanel = new GridPane();
         layoutPanel.setGridLinesVisible(false);
         layoutPanel.setPadding(new Insets(10, 10, 10, 10));
+        String style = "-fx-border-color: lightgrey;";
+        style += " -fx-border-radius: 4px;";
+        layoutPanel.setStyle(style);
         layoutPanel.setHgap(10);
         layoutPanel.setVgap(10);
-
-        getChildren().add(layoutPanel);
-
-        {
-            // Header
-            Label header = new Label("Info");
-            header.setMaxWidth(Double.MAX_VALUE);
-            header.setAlignment(Pos.CENTER);
-            header.setPadding(new Insets(0, 0, 10, 0));
-            Font font = new Font(20);
-            header.setFont(font);
-            layoutPanel.add(header, 0, 0, 3, 1);
-        }
 
         {
             // Model Viewer
             modelViewer = new ModelViewer();
-            layoutPanel.add(modelViewer, 0, 1, 1, 5);
+            layoutPanel.add(modelViewer, 0, 0, 1, 5);
         }
 
         {
@@ -66,7 +55,7 @@ public class InfoView extends AnchorPane implements ChangeListener {
             Label pokemonLbl = new Label("Pokemon:");
             pokemonLbl.setAlignment(Pos.CENTER_RIGHT);
             pokemonLbl.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-            layoutPanel.add(pokemonLbl, 1, 1);
+            layoutPanel.add(pokemonLbl, 1, 0);
 
             pokemonEditor = new ComboBox();
             String[] pokemon = DataTable.getPokemonTable().getPokemon();
@@ -85,7 +74,7 @@ public class InfoView extends AnchorPane implements ChangeListener {
             });
             pokemonEditor.valueProperty().addListener(this);
             pokemonEditor.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-            layoutPanel.add(pokemonEditor, 2, 1);
+            layoutPanel.add(pokemonEditor, 2, 0);
         }
 
         {
@@ -93,12 +82,12 @@ public class InfoView extends AnchorPane implements ChangeListener {
             Label natureLbl = new Label("Nature:");
             natureLbl.setMaxWidth(Double.MAX_VALUE);
             natureLbl.setAlignment(Pos.CENTER_RIGHT);
-            layoutPanel.add(natureLbl, 1, 2);
+            layoutPanel.add(natureLbl, 1, 1);
 
             natureEditor = new ComboBox();
             natureEditor.getItems().addAll(DataTable.getNatureTable().getNatures());
             natureEditor.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-            layoutPanel.add(natureEditor, 2, 2);
+            layoutPanel.add(natureEditor, 2, 1);
         }
 
         {
@@ -106,33 +95,35 @@ public class InfoView extends AnchorPane implements ChangeListener {
             Label levelLbl = new Label("Level:");
             levelLbl.setMaxWidth(Double.MAX_VALUE);
             levelLbl.setAlignment(Pos.CENTER_RIGHT);
-            layoutPanel.add(levelLbl, 1, 3);
+            layoutPanel.add(levelLbl, 1, 2);
 
             levelEditor = new Spinner<Integer>(1, 100, 50);
             levelEditor.setEditable(true);
             levelEditor.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-            layoutPanel.add(levelEditor, 2, 3);
+            layoutPanel.add(levelEditor, 2, 2);
         }
 
         Separator separator = new Separator(Orientation.HORIZONTAL);
         separator.setMaxWidth(Double.MAX_VALUE);
         separator.setPadding(new Insets(0, 10, 0, 10));
-        layoutPanel.add(separator, 1, 4, 2, 1);
+        layoutPanel.add(separator, 1, 3, 2, 1);
 
         {
             // Form Editor
             Label formLbl = new Label("Form:");
             formLbl.setAlignment(Pos.CENTER_RIGHT);
             formLbl.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-            layoutPanel.add(formLbl, 1, 5);
+            layoutPanel.add(formLbl, 1, 4);
 
             formEditor = new ComboBox();
             String[] forms = new String[0];
             formEditor.getItems().setAll(forms);
             formEditor.valueProperty().addListener(this);
             formEditor.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-            layoutPanel.add(formEditor, 2, 5);
+            layoutPanel.add(formEditor, 2, 4);
         }
+
+        getChildren().add(layoutPanel);
     }
 
     @Override

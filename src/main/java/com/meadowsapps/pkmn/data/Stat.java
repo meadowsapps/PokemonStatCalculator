@@ -5,9 +5,9 @@ package com.meadowsapps.pkmn.data;
  */
 public enum Stat {
     HP,
-    ATTACK,
-    DEFENSE,
-    SPATTACK,
-    SPDEFFENSE,
-    SPEED;
+    Attack,
+    Defense,
+    SpAttack,
+    SpDefense,
+    Speed;
 }

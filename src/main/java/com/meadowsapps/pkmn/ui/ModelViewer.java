@@ -1,6 +1,8 @@
-package com.meadowsapps.pkmn;
+package com.meadowsapps.pkmn.ui;
 
+import com.meadowsapps.pkmn.PkmnUtils;
 import com.meadowsapps.pkmn.data.DataTable;
+import javafx.geometry.Insets;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
@@ -14,15 +16,23 @@ public class ModelViewer extends StackPane {
 
     private ImageView modelView;
 
+    private ImageView backgroundView;
+
     public ModelViewer() {
-        ImageView backgroundViewer = new ImageView();
+        backgroundView = new ImageView();
         InputStream stream = PkmnUtils.getResourceAsStream("images/pokeball.gif");
         Image backgroundImage = new Image(stream);
-        backgroundViewer.setImage(backgroundImage);
-        getChildren().add(backgroundViewer);
+        backgroundView.setImage(backgroundImage);
+        getChildren().add(backgroundView);
 
         modelView = new ImageView();
+        modelView.setSmooth(true);
         getChildren().add(modelView);
+
+        setPadding(new Insets(5, 5, 5, 5));
+        String style = "-fx-border-color: lightgrey;";
+        style += "-fx-border-radius: 4px;";
+        setStyle(style);
     }
 
     public void setModel(int pkmnIndex, int formIndex) {
@@ -42,6 +52,10 @@ public class ModelViewer extends StackPane {
 
         InputStream stream = PkmnUtils.getResourceAsStream("images/models/" + fileName);
         Image model = new Image(stream);
+        double bgWidth = backgroundView.getImage().getWidth();
+        double width = (model.getWidth() > bgWidth) ? bgWidth : 0.0;
+        modelView.setPreserveRatio(width != 0.0);
+        modelView.setFitWidth(width);
         modelView.setImage(model);
     }
 

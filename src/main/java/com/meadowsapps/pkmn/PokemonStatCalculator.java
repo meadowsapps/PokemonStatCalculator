@@ -1,8 +1,8 @@
 package com.meadowsapps.pkmn;
 
+import com.meadowsapps.pkmn.ui.InfoView;
+import com.meadowsapps.pkmn.ui.StatView;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 public class PokemonStatCalculator extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        InfoView view = new InfoView();
+        StatView view = new StatView();
         primaryStage.setTitle("Pokemon Stat Calculator");
         primaryStage.setScene(new Scene(view, 300, 275));
         primaryStage.show();
