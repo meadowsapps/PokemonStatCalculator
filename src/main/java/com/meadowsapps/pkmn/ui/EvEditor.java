@@ -75,4 +75,21 @@ public class EvEditor extends GridPane {
             add(spinner, 4, 0);
         }
     }
+
+    public void addChangeListener(ChangeListener listener) {
+        slider.valueProperty().addListener(listener);
+    }
+
+    public void removeChangeListener(ChangeListener listener) {
+        slider.valueProperty().removeListener(listener);
+    }
+
+    public int getValue() {
+        return (int) slider.getValue();
+    }
+
+    public void setValue(int value) {
+        slider.setValue(value);
+        spinner.getValueFactory().setValue(value);
+    }
 }
