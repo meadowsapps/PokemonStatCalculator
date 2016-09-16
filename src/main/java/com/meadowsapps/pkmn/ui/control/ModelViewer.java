@@ -1,4 +1,4 @@
-package com.meadowsapps.pkmn.ui;
+package com.meadowsapps.pkmn.ui.control;
 
 import com.meadowsapps.pkmn.PkmnUtils;
 import com.meadowsapps.pkmn.data.DataTable;

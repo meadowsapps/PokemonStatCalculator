@@ -1,22 +1,23 @@
 package com.meadowsapps.pkmn.ui;
 
 import com.meadowsapps.pkmn.data.DataTable;
+import com.meadowsapps.pkmn.ui.control.ModelViewer;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.control.Spinner;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
 /**
  * Created by Dylan on 9/15/16.
  */
-public class InfoView extends AnchorPane implements ChangeListener {
+public class InfoView extends Component implements ChangeListener {
 
     private ModelViewer modelViewer;
 
@@ -34,7 +35,8 @@ public class InfoView extends AnchorPane implements ChangeListener {
         natureEditor.getSelectionModel().select(0);
     }
 
-    private void initComponents() {
+    @Override
+    public Node initComponents() {
         GridPane layoutPanel = new GridPane();
         layoutPanel.setGridLinesVisible(false);
         layoutPanel.setPadding(new Insets(10, 10, 10, 10));
@@ -122,8 +124,7 @@ public class InfoView extends AnchorPane implements ChangeListener {
             formEditor.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
             layoutPanel.add(formEditor, 2, 4);
         }
-
-        getChildren().add(layoutPanel);
+        return layoutPanel;
     }
 
     @Override
