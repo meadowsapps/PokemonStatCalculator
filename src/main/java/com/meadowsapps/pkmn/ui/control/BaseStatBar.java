@@ -27,7 +27,7 @@ public class BaseStatBar extends Component {
     @Override
     public Node initComponents() {
         GridPane layoutPanel = new GridPane();
-        layoutPanel.setGridLinesVisible(true);
+        layoutPanel.setGridLinesVisible(false);
         layoutPanel.setHgap(10);
         layoutPanel.setVgap(10);
 

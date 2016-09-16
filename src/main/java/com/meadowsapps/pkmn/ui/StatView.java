@@ -16,6 +16,7 @@ import javafx.scene.control.Spinner;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 /**
  * Created by Dylan on 9/15/16.
@@ -23,7 +24,7 @@ import javafx.scene.text.Font;
 public class StatView extends Component implements ChangeListener {
 
     private BaseStatBar[] baseStats;
-    private BaseStatTotalLabel baseStatTotalLbl;
+    private Label baseStatTotalValue;
     private EvEditor[] evs;
     private Spinner<Integer>[] ivs;
     private RemainingEvsLabel remainingEvs;
@@ -44,54 +45,6 @@ public class StatView extends Component implements ChangeListener {
         layoutPanel.setStyle(style);
         layoutPanel.setHgap(10);
         layoutPanel.setVgap(10);
-
-        // Column Constraints
-//        {
-//            // Column 0 - Stat Labels
-//            {
-//                ColumnConstraints constraints = new ColumnConstraints();
-//                constraints.setHgrow(Priority.NEVER);
-//                layoutPanel.getColumnConstraints().add(constraints);
-//            }
-//
-//            // Column 1 - Base Stats
-//            {
-//                ColumnConstraints constraints = new ColumnConstraints();
-//                constraints.setHgrow(Priority.SOMETIMES);
-//                constraints.setMinWidth(300);
-//                layoutPanel.getColumnConstraints().add(constraints);
-//            }
-//
-//            // Column 2 - Separator
-//            {
-//                ColumnConstraints constraints = new ColumnConstraints();
-//                constraints.setHgrow(Priority.NEVER);
-//                layoutPanel.getColumnConstraints().add(constraints);
-//            }
-//
-//            // Column 3 - EVs
-//            {
-//                ColumnConstraints constraints = new ColumnConstraints();
-//                constraints.setMaxWidth(Double.MAX_VALUE);
-//                constraints.setHgrow(Priority.ALWAYS);
-//                constraints.setFillWidth(true);
-//                layoutPanel.getColumnConstraints().add(constraints);
-//            }
-//
-//            // Column 4 - Separator
-//            {
-//                ColumnConstraints constraints = new ColumnConstraints();
-//                constraints.setHgrow(Priority.NEVER);
-//                layoutPanel.getColumnConstraints().add(constraints);
-//            }
-//
-//            // Column 5 - IVs
-//            {
-//                ColumnConstraints constraints = new ColumnConstraints();
-//                constraints.setHgrow(Priority.NEVER);
-//                layoutPanel.getColumnConstraints().add(constraints);
-//            }
-//        }
 
         // Header Labels
         {
@@ -176,11 +129,24 @@ public class StatView extends Component implements ChangeListener {
                 HPos.CENTER, VPos.CENTER, Priority.NEVER, Priority.NEVER);
         layoutPanel.getChildren().add(separator2);
 
-        baseStatTotalLbl = new BaseStatTotalLabel();
-        baseStatTotalLbl.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        GridPane.setConstraints(baseStatTotalLbl, 1, 7, 1, 1,
-                HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
-        layoutPanel.getChildren().add(baseStatTotalLbl);
+        // Base Stat Total
+        {
+            Label totalLbl = new Label("Total:");
+            Font font = totalLbl.getFont();
+            font = Font.font(font.getName(), FontWeight.BOLD, font.getSize() + 2);
+            totalLbl.setFont(font);
+            GridPane.setConstraints(totalLbl, 0, 7, 1, 1,
+                    HPos.RIGHT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+            layoutPanel.getChildren().add(totalLbl);
+
+            baseStatTotalValue = new Label(Integer.toString(0));
+            baseStatTotalValue.setFont(font);
+            baseStatTotalValue.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+            GridPane.setConstraints(baseStatTotalValue, 1, 7, 1, 1,
+                    HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
+            layoutPanel.getChildren().add(baseStatTotalValue);
+        }
+
 
         remainingEvs = new RemainingEvsLabel();
         remainingEvs.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
@@ -205,37 +171,6 @@ public class StatView extends Component implements ChangeListener {
                     baseStats[s.ordinal()].setValue(((int) bean.getValue()));
                 }
             }
-        }
-    }
-
-    class BaseStatTotalLabel extends Component {
-
-        private Label valueLbl;
-
-        @Override
-        public Node initComponents() {
-            GridPane layoutPanel = new GridPane();
-            layoutPanel.setHgap(10);
-            layoutPanel.setVgap(10);
-
-            {
-                Label totalLbl = new Label("Total:");
-                totalLbl.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-                totalLbl.setAlignment(Pos.CENTER_RIGHT);
-                layoutPanel.add(totalLbl, 0, 0);
-            }
-
-            {
-                valueLbl = new Label(Integer.toString(0));
-                valueLbl.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-                valueLbl.setAlignment(Pos.CENTER_LEFT);
-                layoutPanel.add(valueLbl, 1, 0);
-            }
-            return layoutPanel;
-        }
-
-        public void setValue(int value) {
-            valueLbl.setText(Integer.toString(value));
         }
     }
 
