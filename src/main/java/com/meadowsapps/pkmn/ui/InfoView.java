@@ -1,6 +1,7 @@
 package com.meadowsapps.pkmn.ui;
 
 import com.meadowsapps.pkmn.data.DataTable;
+import com.meadowsapps.pkmn.data.Pokemon;
 import com.meadowsapps.pkmn.ui.control.ModelViewer;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -25,14 +26,12 @@ public class InfoView extends Component implements ChangeListener {
 
     private ComboBox natureEditor;
 
-    private Spinner<Integer> levelEditor;
+    private Spinner levelEditor;
 
     private ComboBox formEditor;
 
     public InfoView() {
-        initComponents();
         pokemonEditor.getSelectionModel().select(0);
-        natureEditor.getSelectionModel().select(0);
     }
 
     @Override
@@ -134,4 +133,33 @@ public class InfoView extends Component implements ChangeListener {
         formIndex = (formIndex == -1) ? 0 : formIndex;
         modelViewer.setModel(pkmnIndex, formIndex);
     }
+
+    public void bind(Pokemon pokemon) {
+        pokemon.getName().bindBidirectional(pokemonEditor.valueProperty());
+        pokemon.getNature().bindBidirectional(natureEditor.valueProperty());
+        pokemon.getLevel().bindBidirectional(levelEditor.getValueFactory().valueProperty());
+        pokemon.getForm().bindBidirectional(formEditor.valueProperty());
+    }
+
+    public void unbind(Pokemon pokemon) {
+        pokemon.getName().unbindBidirectional(pokemonEditor.valueProperty());
+        pokemon.getNature().unbindBidirectional(natureEditor.valueProperty());
+        pokemon.getLevel().unbindBidirectional(levelEditor.getValueFactory().valueProperty());
+        pokemon.getForm().unbindBidirectional(formEditor.valueProperty());
+    }
+
+    private void setModel(String pokemon, String form) {
+        int dexNumber = DataTable.getPokemonTable().getDexNumber(pokemon);
+        int formIndex = 0;
+        String[] forms = DataTable.getFormTable().getForms(dexNumber);
+        for (String f : forms) {
+            if (f.equals(form)) {
+                break;
+            }
+            formIndex++;
+        }
+        formIndex = (formIndex == forms.length) ? 0 : formIndex;
+        modelViewer.setModel(dexNumber, formIndex);
+    }
+
 }

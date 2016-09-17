@@ -88,7 +88,6 @@ public class StatView extends Component implements ChangeListener {
             {
                 BaseStatBar baseStat = new BaseStatBar(stat.getFill());
                 baseStat.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-                baseStat.setAlignment(Pos.CENTER_LEFT);
                 GridPane.setConstraints(baseStat, 1, index + 1, 1, 1,
                         HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
                 layoutPanel.getChildren().add(baseStat);
@@ -99,7 +98,6 @@ public class StatView extends Component implements ChangeListener {
             {
                 EvEditor ev = new EvEditor();
                 ev.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-                ev.setAlignment(Pos.CENTER_LEFT);
                 ev.addChangeListener(this);
                 ev.setSliderGroup(group);
                 GridPane.setConstraints(ev, 3, index + 1, 1, 1,
@@ -150,7 +148,6 @@ public class StatView extends Component implements ChangeListener {
 
         remainingEvs = new RemainingEvsLabel();
         remainingEvs.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        remainingEvs.setAlignment(Pos.CENTER_LEFT);
         layoutPanel.add(remainingEvs, 3, 7);
         return layoutPanel;
     }

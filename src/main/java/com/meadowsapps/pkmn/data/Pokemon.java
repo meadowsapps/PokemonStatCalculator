@@ -1,88 +1,58 @@
 package com.meadowsapps.pkmn.data;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+
 /**
  * Created by Dylan on 9/13/16.
  */
 public class Pokemon {
 
-    private String name;
-
-    private Nature nature;
-
-    private int level;
-
-    private String form;
-
-    private int[] evs = new int[6];
-
-    private int[] ivs = new int[6];
+    private StringProperty name;
+    private StringProperty nature;
+    private IntegerProperty level;
+    private StringProperty form;
+    private IntegerProperty[] evs;
+    private IntegerProperty[] ivs;
 
     public Pokemon() {
-        this.level = 50;
-        this.nature = Nature.Adamant;
+        name = new SimpleStringProperty("");
+        nature = new SimpleStringProperty(Nature.Adamant.name());
+        level = new SimpleIntegerProperty(50);
+        form = new SimpleStringProperty("");
+        evs = new IntegerProperty[6];
+        ivs = new IntegerProperty[6];
+        for (Stat stat : Stat.values()) {
+            evs[stat.ordinal()] = new SimpleIntegerProperty(0);
+            ivs[stat.ordinal()] = new SimpleIntegerProperty(31);
+        }
     }
 
-    public String getName() {
+    public StringProperty getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Nature getNature() {
+    public StringProperty getNature() {
         return nature;
     }
 
-    public void setNature(Nature nature) {
-        this.nature = nature;
-    }
-
-    public int getLevel() {
+    public IntegerProperty getLevel() {
         return level;
     }
 
-    public void setLevel(int level) {
-        this.level = level;
-    }
-
-    public String getForm() {
+    public StringProperty getForm() {
         return form;
     }
 
-    public void setForm(String form) {
-        this.form = form;
-    }
-
-    public int getEv(Stat stat) {
+    public IntegerProperty getEv(Stat stat) {
         return evs[stat.ordinal()];
     }
 
-    public int[] getEvs() {
-        return evs;
-    }
-
-    void setEvs(int[] evs) {
-        this.evs = evs;
-    }
-
-    public void setEv(Stat stat, int ev) {
-        evs[stat.ordinal()] = ev;
-    }
-
-    public int getIv(Stat stat) {
+    public IntegerProperty getIv(Stat stat) {
         return ivs[stat.ordinal()];
-    }
-
-    public int[] getIvs() {
-        return ivs;
-    }
-
-    void setIvs(int[] ivs) {
-        this.ivs = ivs;
-    }
-
-    public void setIv(Stat stat, int iv) {
-        ivs[stat.ordinal()] = iv;
     }
 }
