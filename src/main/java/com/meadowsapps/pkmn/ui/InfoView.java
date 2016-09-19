@@ -18,7 +18,7 @@ import javafx.scene.layout.GridPane;
 /**
  * Created by Dylan on 9/15/16.
  */
-public class InfoView extends Component implements ChangeListener {
+public class InfoView extends View {
 
     private ModelViewer modelViewer;
 
@@ -29,10 +29,6 @@ public class InfoView extends Component implements ChangeListener {
     private Spinner levelEditor;
 
     private ComboBox formEditor;
-
-    public InfoView() {
-        pokemonEditor.getSelectionModel().select(0);
-    }
 
     @Override
     public Node initComponents() {
@@ -61,17 +57,15 @@ public class InfoView extends Component implements ChangeListener {
             pokemonEditor = new ComboBox();
             String[] pokemon = DataTable.getPokemonTable().getPokemon();
             pokemonEditor.getItems().addAll(pokemon);
-            pokemonEditor.valueProperty().addListener(new ChangeListener() {
-                @Override
-                public void changed(ObservableValue observable, Object oldValue, Object newValue) {
-                    int index = pokemonEditor.getSelectionModel().getSelectedIndex() + 1;
-                    String[] forms = DataTable.getFormTable().getForms(index);
-                    formEditor.getItems().setAll(forms);
-                    if (forms.length > 0) {
-                        formEditor.getSelectionModel().select(0);
-                    }
-                    formEditor.setDisable(forms.length == 0);
+            pokemonEditor.getSelectionModel().select(0);
+            pokemonEditor.valueProperty().addListener((observable, oldValue, newValue) -> {
+                int index = pokemonEditor.getSelectionModel().getSelectedIndex() + 1;
+                String[] forms = DataTable.getFormTable().getForms(index);
+                formEditor.getItems().setAll(forms);
+                if (forms.length > 0) {
+                    formEditor.getSelectionModel().select(0);
                 }
+                formEditor.setDisable(forms.length == 0);
             });
             pokemonEditor.valueProperty().addListener(this);
             pokemonEditor.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
@@ -87,6 +81,7 @@ public class InfoView extends Component implements ChangeListener {
 
             natureEditor = new ComboBox();
             natureEditor.getItems().addAll(DataTable.getNatureTable().getNatures());
+            natureEditor.getSelectionModel().select(0);
             natureEditor.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
             layoutPanel.add(natureEditor, 2, 1);
         }
@@ -134,32 +129,28 @@ public class InfoView extends Component implements ChangeListener {
         modelViewer.setModel(pkmnIndex, formIndex);
     }
 
-    public void bind(Pokemon pokemon) {
-        pokemon.getName().bindBidirectional(pokemonEditor.valueProperty());
-        pokemon.getNature().bindBidirectional(natureEditor.valueProperty());
-        pokemon.getLevel().bindBidirectional(levelEditor.getValueFactory().valueProperty());
-        pokemon.getForm().bindBidirectional(formEditor.valueProperty());
-    }
-
-    public void unbind(Pokemon pokemon) {
-        pokemon.getName().unbindBidirectional(pokemonEditor.valueProperty());
-        pokemon.getNature().unbindBidirectional(natureEditor.valueProperty());
-        pokemon.getLevel().unbindBidirectional(levelEditor.getValueFactory().valueProperty());
-        pokemon.getForm().unbindBidirectional(formEditor.valueProperty());
-    }
-
-    private void setModel(String pokemon, String form) {
-        int dexNumber = DataTable.getPokemonTable().getDexNumber(pokemon);
-        int formIndex = 0;
-        String[] forms = DataTable.getFormTable().getForms(dexNumber);
-        for (String f : forms) {
-            if (f.equals(form)) {
-                break;
-            }
-            formIndex++;
+    @Override
+    protected void bind(Pokemon pokemon) {
+        if (pokemon != null) {
+            pokemon.getName().bindBidirectional(pokemonEditor.valueProperty());
+            pokemon.getNature().bindBidirectional(natureEditor.valueProperty());
+            pokemon.getLevel().bindBidirectional(levelEditor.getValueFactory().valueProperty());
+            pokemon.getForm().bindBidirectional(formEditor.valueProperty());
+            pokemon.getName().addListener(this);
+            pokemon.getForm().addListener(this);
         }
-        formIndex = (formIndex == forms.length) ? 0 : formIndex;
-        modelViewer.setModel(dexNumber, formIndex);
+    }
+
+    @Override
+    protected void unbind(Pokemon pokemon) {
+        if (pokemon != null) {
+            pokemon.getName().unbindBidirectional(pokemonEditor.valueProperty());
+            pokemon.getNature().unbindBidirectional(natureEditor.valueProperty());
+            pokemon.getLevel().unbindBidirectional(levelEditor.getValueFactory().valueProperty());
+            pokemon.getForm().unbindBidirectional(formEditor.valueProperty());
+            pokemon.getName().removeListener(this);
+            pokemon.getForm().removeListener(this);
+        }
     }
 
 }

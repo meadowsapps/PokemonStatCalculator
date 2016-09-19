@@ -4,8 +4,6 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 
 /**
  * Created by Dylan on 9/13/16.
@@ -19,8 +17,16 @@ public class Pokemon {
     private IntegerProperty[] evs;
     private IntegerProperty[] ivs;
 
+    public static final String NAME = "Name";
+    public static final String NATURE = "Nature";
+    public static final String LEVEL = "Level";
+    public static final String FORM = "Form";
+    public static final String EV = "EV:";
+    public static final String IV = "IV:";
+
     public Pokemon() {
-        name = new SimpleStringProperty("");
+        String name = DataTable.getPokemonTable().getPokemon(1);
+        this.name = new SimpleStringProperty(name);
         nature = new SimpleStringProperty(Nature.Adamant.name());
         level = new SimpleIntegerProperty(50);
         form = new SimpleStringProperty("");

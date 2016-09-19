@@ -1,6 +1,7 @@
 package com.meadowsapps.pkmn.ui.control;
 
 import com.meadowsapps.pkmn.ui.Component;
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.scene.Node;
 import javafx.scene.control.Slider;
@@ -96,6 +97,14 @@ public class EvEditor extends Component {
      */
     public void removeChangeListener(ChangeListener listener) {
         slider.valueProperty().removeListener(listener);
+    }
+
+    public void bind(IntegerProperty property) {
+        slider.valueProperty().bindBidirectional(property);
+    }
+
+    public void unbind(IntegerProperty property) {
+        slider.valueProperty().unbindBidirectional(property);
     }
 
     /**

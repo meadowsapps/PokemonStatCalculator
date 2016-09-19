@@ -1,17 +1,16 @@
 package com.meadowsapps.pkmn.ui;
 
+import com.meadowsapps.pkmn.data.DataTable;
+import com.meadowsapps.pkmn.data.Pokemon;
 import com.meadowsapps.pkmn.data.Stat;
 import com.meadowsapps.pkmn.ui.control.BaseStatBar;
 import com.meadowsapps.pkmn.ui.control.EvEditor;
 import com.meadowsapps.pkmn.ui.control.SliderGroup;
-import javafx.beans.property.ReadOnlyProperty;
 import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.geometry.*;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
-import javafx.scene.control.Slider;
 import javafx.scene.control.Spinner;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
@@ -21,12 +20,12 @@ import javafx.scene.text.FontWeight;
 /**
  * Created by Dylan on 9/15/16.
  */
-public class StatView extends Component implements ChangeListener {
+public class StatView extends View implements ChangeListener {
 
     private BaseStatBar[] baseStats;
     private Label baseStatTotalValue;
     private EvEditor[] evs;
-    private Spinner<Integer>[] ivs;
+    private Spinner[] ivs;
     private RemainingEvsLabel remainingEvs;
     private SliderGroup group;
 
@@ -48,7 +47,8 @@ public class StatView extends Component implements ChangeListener {
 
         // Header Labels
         {
-            Font headerFont = new Font(15);
+            Font font = Font.getDefault();
+            Font headerFont = Font.font(font.getFamily(), FontWeight.BOLD, 15);
             {
                 // Base Stat Label
                 Label baseStatLbl = new Label("Base Stats");
@@ -98,7 +98,9 @@ public class StatView extends Component implements ChangeListener {
             {
                 EvEditor ev = new EvEditor();
                 ev.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-                ev.addChangeListener(this);
+                ev.addChangeListener((observable, oldValue, newValue) -> {
+                    updateEvs();
+                });
                 ev.setSliderGroup(group);
                 GridPane.setConstraints(ev, 3, index + 1, 1, 1,
                         HPos.LEFT, VPos.CENTER, Priority.ALWAYS, Priority.ALWAYS);
@@ -131,7 +133,7 @@ public class StatView extends Component implements ChangeListener {
         {
             Label totalLbl = new Label("Total:");
             Font font = totalLbl.getFont();
-            font = Font.font(font.getName(), FontWeight.BOLD, font.getSize() + 2);
+            font = Font.font(font.getName(), FontWeight.BOLD, font.getSize());
             totalLbl.setFont(font);
             GridPane.setConstraints(totalLbl, 0, 7, 1, 1,
                     HPos.RIGHT, VPos.CENTER, Priority.NEVER, Priority.NEVER);
@@ -153,22 +155,73 @@ public class StatView extends Component implements ChangeListener {
     }
 
     @Override
-    public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+    protected void propertyChanged(String property) {
+        switch (property) {
+            case Pokemon.NAME:
+            case Pokemon.FORM:
+                updateBaseStats();
+                break;
+            case Pokemon.NATURE:
+                updateNature();
+                break;
+
+        }
+    }
+
+    @Override
+    protected void bind(Pokemon pokemon) {
+        if (pokemon != null) {
+            for (Stat stat : Stat.values()) {
+                EvEditor evEditor = evs[stat.ordinal()];
+                evEditor.bind(pokemon.getEv(stat));
+
+                Spinner ivEditor = ivs[stat.ordinal()];
+                pokemon.getIv(stat).bindBidirectional(ivEditor.getValueFactory().valueProperty());
+            }
+            pokemon.getName().addListener(this);
+            pokemon.getForm().addListener(this);
+        }
+    }
+
+    @Override
+    protected void unbind(Pokemon pokemon) {
+        if (pokemon != null) {
+            for (Stat stat : Stat.values()) {
+                EvEditor evEditor = evs[stat.ordinal()];
+                evEditor.unbind(pokemon.getEv(stat));
+
+                Spinner ivEditor = ivs[stat.ordinal()];
+                pokemon.getIv(stat).unbindBidirectional(ivEditor.getValueFactory().valueProperty());
+            }
+            pokemon.getName().removeListener(this);
+            pokemon.getForm().removeListener(this);
+        }
+    }
+
+    private void updateNature() {
+
+    }
+
+    private void updateBaseStats() {
+        String pokemon = getPokemon().getName().getValue();
+        int dexNumber = DataTable.getPokemonTable().getDexNumber(pokemon);
+        String form = getPokemon().getForm().getValue();
+        Integer[] baseStats = DataTable.getBaseStatTable().getBaseStats(dexNumber, form);
+
+        int sum = 0;
+        for (Stat stat : Stat.values()) {
+            this.baseStats[stat.ordinal()].setValue(baseStats[stat.ordinal()]);
+            sum += baseStats[stat.ordinal()];
+        }
+        baseStatTotalValue.setText(Integer.toString(sum));
+    }
+
+    private void updateEvs() {
         int total = 510;
         for (EvEditor evEditor : evs) {
             total -= evEditor.getValue();
         }
         remainingEvs.setValue(total);
-
-        if (observable instanceof ReadOnlyProperty) {
-            Slider bean = (Slider) ((ReadOnlyProperty) observable).getBean();
-            for (Stat s : Stat.values()) {
-                GridPane pane = (GridPane) evs[s.ordinal()].getChildren().get(0);
-                if (pane.getChildren().contains(bean)) {
-                    baseStats[s.ordinal()].setValue(((int) bean.getValue()));
-                }
-            }
-        }
     }
 
     class RemainingEvsLabel extends Component {

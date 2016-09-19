@@ -17,7 +17,7 @@ public class PokemonStatCalculator extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         StatCalculatorView view = new StatCalculatorView();
-        Pokemon pokemon = new Pokemon();
+        final Pokemon pokemon = new Pokemon();
         view.setPokemon(pokemon);
         primaryStage.setTitle("Pokemon Stat Calculator");
         primaryStage.setScene(new Scene(view, view.getMinWidth(), view.getMinHeight()));

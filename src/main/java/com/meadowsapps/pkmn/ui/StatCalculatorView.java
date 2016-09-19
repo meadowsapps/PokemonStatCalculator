@@ -1,13 +1,14 @@
 package com.meadowsapps.pkmn.ui;
 
 import com.meadowsapps.pkmn.data.Pokemon;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 
 /**
  * Created by Dylan on 9/16/16.
  */
-public class StatCalculatorView extends Component {
+public class StatCalculatorView extends View {
 
     private Pokemon pokemon;
     private InfoView infoView;
@@ -28,12 +29,18 @@ public class StatCalculatorView extends Component {
         return layoutPanel;
     }
 
-    public Pokemon getPokemon() {
-        return pokemon;
+    @Override
+    public void changed(ObservableValue observable, Object oldValue, Object newValue) {
     }
 
-    public void setPokemon(Pokemon pokemon) {
-        this.pokemon = pokemon;
-        infoView.bind(pokemon);
+    @Override
+    protected void bind(Pokemon pokemon) {
+        infoView.setPokemon(pokemon);
+        statView.setPokemon(pokemon);
     }
+
+    @Override
+    protected void unbind(Pokemon pokemon) {
+    }
+
 }
