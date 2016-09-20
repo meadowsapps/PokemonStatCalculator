@@ -3,8 +3,6 @@ package com.meadowsapps.pkmn.ui;
 import com.meadowsapps.pkmn.data.DataTable;
 import com.meadowsapps.pkmn.data.Pokemon;
 import com.meadowsapps.pkmn.ui.control.ModelViewer;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -18,7 +16,7 @@ import javafx.scene.layout.GridPane;
 /**
  * Created by Dylan on 9/15/16.
  */
-public class InfoView extends View {
+public class InfoView extends View implements Initializable {
 
     private ModelViewer modelViewer;
 
@@ -57,7 +55,6 @@ public class InfoView extends View {
             pokemonEditor = new ComboBox();
             String[] pokemon = DataTable.getPokemonTable().getPokemon();
             pokemonEditor.getItems().addAll(pokemon);
-            pokemonEditor.getSelectionModel().select(0);
             pokemonEditor.valueProperty().addListener((observable, oldValue, newValue) -> {
                 int index = pokemonEditor.getSelectionModel().getSelectedIndex() + 1;
                 String[] forms = DataTable.getFormTable().getForms(index);
@@ -81,7 +78,6 @@ public class InfoView extends View {
 
             natureEditor = new ComboBox();
             natureEditor.getItems().addAll(DataTable.getNatureTable().getNatures());
-            natureEditor.getSelectionModel().select(0);
             natureEditor.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
             layoutPanel.add(natureEditor, 2, 1);
         }
@@ -122,11 +118,18 @@ public class InfoView extends View {
     }
 
     @Override
-    public void changed(ObservableValue observable, Object oldValue, Object newValue) {
-        int pkmnIndex = pokemonEditor.getSelectionModel().getSelectedIndex() + 1;
-        int formIndex = formEditor.getSelectionModel().getSelectedIndex();
-        formIndex = (formIndex == -1) ? 0 : formIndex;
-        modelViewer.setModel(pkmnIndex, formIndex);
+    public void initialize() {
+        pokemonEditor.getSelectionModel().select(0);
+        natureEditor.getSelectionModel().select(0);
+        formEditor.getSelectionModel().select(0);
+        updateModel();
+    }
+
+    @Override
+    protected void propertyChanged(String property) {
+        if (property.equals(Pokemon.NAME) || property.equals(Pokemon.FORM)) {
+            updateModel();
+        }
     }
 
     @Override
@@ -136,8 +139,8 @@ public class InfoView extends View {
             pokemon.getNature().bindBidirectional(natureEditor.valueProperty());
             pokemon.getLevel().bindBidirectional(levelEditor.getValueFactory().valueProperty());
             pokemon.getForm().bindBidirectional(formEditor.valueProperty());
-            pokemon.getName().addListener(this);
-            pokemon.getForm().addListener(this);
+            registerProperty(pokemon.getName());
+            registerProperty(pokemon.getForm());
         }
     }
 
@@ -148,9 +151,16 @@ public class InfoView extends View {
             pokemon.getNature().unbindBidirectional(natureEditor.valueProperty());
             pokemon.getLevel().unbindBidirectional(levelEditor.getValueFactory().valueProperty());
             pokemon.getForm().unbindBidirectional(formEditor.valueProperty());
-            pokemon.getName().removeListener(this);
-            pokemon.getForm().removeListener(this);
+            deregisterProperty(pokemon.getName());
+            deregisterProperty(pokemon.getForm());
         }
+    }
+
+    private void updateModel() {
+        int pkmnIndex = pokemonEditor.getSelectionModel().getSelectedIndex() + 1;
+        int formIndex = formEditor.getSelectionModel().getSelectedIndex();
+        formIndex = (formIndex == -1) ? 0 : formIndex;
+        modelViewer.setModel(pkmnIndex, formIndex);
     }
 
 }

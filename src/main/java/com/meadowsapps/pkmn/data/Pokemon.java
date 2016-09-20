@@ -26,10 +26,10 @@ public class Pokemon {
 
     public Pokemon() {
         String name = DataTable.getPokemonTable().getPokemon(1);
-        this.name = new SimpleStringProperty(name);
-        nature = new SimpleStringProperty(Nature.Adamant.name());
-        level = new SimpleIntegerProperty(50);
-        form = new SimpleStringProperty("");
+        this.name = new SimpleStringProperty(null, NAME, name);
+        nature = new SimpleStringProperty(null, NATURE, Nature.Adamant.name());
+        level = new SimpleIntegerProperty(null, LEVEL, 50);
+        form = new SimpleStringProperty(null, FORM, "");
         evs = new IntegerProperty[6];
         ivs = new IntegerProperty[6];
         for (Stat stat : Stat.values()) {

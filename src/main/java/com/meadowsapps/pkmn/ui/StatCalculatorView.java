@@ -2,6 +2,7 @@ package com.meadowsapps.pkmn.ui;
 
 import com.meadowsapps.pkmn.data.Pokemon;
 import javafx.beans.value.ObservableValue;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 
@@ -10,7 +11,6 @@ import javafx.scene.layout.BorderPane;
  */
 public class StatCalculatorView extends View {
 
-    private Pokemon pokemon;
     private InfoView infoView;
     private StatView statView;
 
@@ -30,7 +30,7 @@ public class StatCalculatorView extends View {
     }
 
     @Override
-    public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+    protected void propertyChanged(String property) {
     }
 
     @Override

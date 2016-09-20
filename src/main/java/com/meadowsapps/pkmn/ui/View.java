@@ -1,11 +1,11 @@
 package com.meadowsapps.pkmn.ui;
 
 import com.meadowsapps.pkmn.data.Pokemon;
-import javafx.beans.property.ReadOnlyProperty;
+import javafx.beans.property.Property;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 
-import java.util.HashMap;
+import java.util.Vector;
 
 /**
  * Created by Dylan on 9/17/16.
@@ -14,36 +14,34 @@ public abstract class View extends Component implements ChangeListener {
 
     private Pokemon pokemon;
 
-    private HashMap<Object, String> propertyMap;
+    private Vector<Property> properties;
 
     public View() {
-        propertyMap = new HashMap<>();
+        properties = new Vector<>();
     }
 
     @Override
     public void changed(ObservableValue observable, Object oldValue, Object newValue) {
-        if (observable instanceof ReadOnlyProperty) {
-            Object editor = ((ReadOnlyProperty) observable).getBean();
-            if (propertyMap.containsKey(editor)) {
-                String property = propertyMap.get(editor);
-
+        if (observable instanceof Property) {
+            Property property = (Property) observable;
+            if (properties.contains(property)) {
+                propertyChanged(property.getName());
             }
         }
     }
 
-    public void registerProperty(String property, Object editor) {
-        propertyMap.put(editor, property);
+    public void registerProperty(Property property) {
+        if (!properties.contains(property)) {
+            property.addListener(this);
+            properties.add(property);
+        }
     }
 
-    public void deregisterProperty(String property) {
-        Object editor = null;
-        for (Object key : propertyMap.keySet()) {
-            if (propertyMap.get(key).equals(property)) {
-                editor = key;
-                break;
-            }
+    public void deregisterProperty(Property property) {
+        if (properties.contains(property)) {
+            property.removeListener(this);
+            properties.remove(property);
         }
-        propertyMap.remove(editor);
     }
 
     protected abstract void propertyChanged(String property);

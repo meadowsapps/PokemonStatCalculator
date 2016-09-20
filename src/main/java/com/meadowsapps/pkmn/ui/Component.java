@@ -2,7 +2,6 @@ package com.meadowsapps.pkmn.ui;
 
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 
 /**
  * Created by Dylan on 9/16/16.

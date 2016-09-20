@@ -20,7 +20,7 @@ import javafx.scene.text.FontWeight;
 /**
  * Created by Dylan on 9/15/16.
  */
-public class StatView extends View implements ChangeListener {
+public class StatView extends View implements Initializable {
 
     private BaseStatBar[] baseStats;
     private Label baseStatTotalValue;
@@ -155,6 +155,11 @@ public class StatView extends View implements ChangeListener {
     }
 
     @Override
+    public void initialize() {
+        updateBaseStats();
+    }
+
+    @Override
     protected void propertyChanged(String property) {
         switch (property) {
             case Pokemon.NAME:
@@ -178,8 +183,9 @@ public class StatView extends View implements ChangeListener {
                 Spinner ivEditor = ivs[stat.ordinal()];
                 pokemon.getIv(stat).bindBidirectional(ivEditor.getValueFactory().valueProperty());
             }
-            pokemon.getName().addListener(this);
-            pokemon.getForm().addListener(this);
+            registerProperty(pokemon.getName());
+            registerProperty(pokemon.getForm());
+            registerProperty(pokemon.getNature());
         }
     }
 
@@ -193,13 +199,13 @@ public class StatView extends View implements ChangeListener {
                 Spinner ivEditor = ivs[stat.ordinal()];
                 pokemon.getIv(stat).unbindBidirectional(ivEditor.getValueFactory().valueProperty());
             }
-            pokemon.getName().removeListener(this);
-            pokemon.getForm().removeListener(this);
+            deregisterProperty(pokemon.getName());
+            deregisterProperty(pokemon.getForm());
+            deregisterProperty(pokemon.getNature());
         }
     }
 
     private void updateNature() {
-
     }
 
     private void updateBaseStats() {

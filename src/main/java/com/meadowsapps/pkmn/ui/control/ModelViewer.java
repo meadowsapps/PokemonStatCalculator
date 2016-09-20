@@ -2,37 +2,33 @@ package com.meadowsapps.pkmn.ui.control;
 
 import com.meadowsapps.pkmn.PkmnUtils;
 import com.meadowsapps.pkmn.data.DataTable;
-import javafx.geometry.Insets;
+import com.meadowsapps.pkmn.ui.FxmlComponent;
+import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.GridPane;
 
 import java.io.InputStream;
 
 /**
  * Created by Dylan on 9/15/16.
  */
-public class ModelViewer extends StackPane {
+public class ModelViewer extends FxmlComponent<GridPane> {
 
-    private ImageView modelView;
+    @FXML
+    private ImageView modelViewer;
 
-    private ImageView backgroundView;
+    @FXML
+    private ImageView backgroundImage;
 
-    public ModelViewer() {
-        backgroundView = new ImageView();
+    @Override
+    public void initialize() {
         InputStream stream = PkmnUtils.getResourceAsStream("images/pokeball.gif");
         Image backgroundImage = new Image(stream);
-        backgroundView.setImage(backgroundImage);
-        getChildren().add(backgroundView);
-
-        modelView = new ImageView();
-        modelView.setSmooth(true);
-        getChildren().add(modelView);
-
-        setPadding(new Insets(5, 5, 5, 5));
-        String style = "-fx-border-color: lightgrey;";
-        style += "-fx-border-radius: 4px;";
-        setStyle(style);
+        this.backgroundImage.setImage(backgroundImage);
+        double width = backgroundImage.getWidth();
+        double height = backgroundImage.getHeight();
+        setPrefSize(width, height);
     }
 
     public void setModel(int pkmnIndex, int formIndex) {
@@ -52,11 +48,11 @@ public class ModelViewer extends StackPane {
 
         InputStream stream = PkmnUtils.getResourceAsStream("images/models/" + fileName);
         Image model = new Image(stream);
-        double bgWidth = backgroundView.getImage().getWidth();
+        double bgWidth = backgroundImage.getImage().getWidth();
         double width = (model.getWidth() > bgWidth) ? bgWidth : 0.0;
-        modelView.setPreserveRatio(width != 0.0);
-        modelView.setFitWidth(width);
-        modelView.setImage(model);
+        modelViewer.setPreserveRatio(width != 0.0);
+        modelViewer.setFitWidth(width);
+        modelViewer.setImage(model);
     }
 
 }
