@@ -48,6 +48,10 @@ public class SliderGroup implements ChangeListener<Number> {
         }
     }
 
+    public int getTotal() {
+        return total;
+    }
+
     public int getSum() {
         int sum = 0;
         for (Slider s : sliders) {
@@ -55,4 +59,5 @@ public class SliderGroup implements ChangeListener<Number> {
         }
         return sum;
     }
+
 }

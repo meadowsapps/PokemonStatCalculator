@@ -1,4 +1,4 @@
-package com.meadowsapps.pkmn.ui;
+package com.meadowsapps.pkmn.ui.control;
 
 /**
  * Created by dmeadows on 9/19/16.

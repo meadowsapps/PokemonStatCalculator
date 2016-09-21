@@ -1,0 +1,9 @@
+.view {
+	-fx-border-radius: 4px;
+	-fx-border-color: lightgrey;
+}
+
+.header {
+	-fx-font-size: 15;
+	-fx-font-weight: bold;
+}

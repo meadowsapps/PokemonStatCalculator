@@ -4,12 +4,12 @@
 	Mega
 },
 6:{
-    ,
+    Normal,
 	Mega X,
 	Mega Y
 },
 9:{
-    ,
+    Normal,
 	Mega
 },
 12:{
@@ -17,11 +17,11 @@
 	Female
 },
 15:{
-    ,
+    Normal,
 	Mega
 },
 18:{
-    ,
+    Normal,
 	Mega
 },
 19:{
@@ -67,7 +67,7 @@
 	Mega
 },
 80:{
-    ,
+    Normal,
 	Mega
 },
 84:{
@@ -79,7 +79,7 @@
 	Female
 },
 94:{
-    ,
+    Normal,
 	Mega
 },
 97:{
@@ -95,7 +95,7 @@
 	Female
 },
 115:{
-    ,
+    Normal,
 	Mega
 },
 118:{
@@ -111,7 +111,7 @@
 	Female
 },
 127:{
-    ,
+    Normal,
 	Mega
 },
 129:{
@@ -124,11 +124,11 @@
 	Mega
 },
 142:{
-    ,
+    Normal,
 	Mega
 },
 150:{
-    ,
+    Normal,
 	Mega X,
 	Mega Y
 },
@@ -149,7 +149,7 @@
 	Female
 },
 181:{
-    ,
+    Normal,
 	Mega
 },
 185:{
@@ -203,7 +203,7 @@
 	X,
 	Y,
 	Z,
-	?,
+	 Normal,
 	!
 },
 202:{
@@ -259,11 +259,11 @@
 	Female
 },
 248:{
-    ,
+    Normal,
 	Mega
 },
 254:{
-    ,
+    Normal,
 	Mega
 },
 255:{
@@ -280,7 +280,7 @@
 	Mega
 },
 260:{
-    ,
+    Normal,
 	Mega
 },
 267:{
@@ -304,19 +304,19 @@
 	Female
 },
 282:{
-    ,
+    Normal,
 	Mega
 },
 302:{
-    ,
+    Normal,
 	Mega
 },
 303:{
-    ,
+    Normal,
 	Mega
 },
 306:{
-    ,
+    Normal,
 	Mega
 },
 307:{
@@ -329,7 +329,7 @@
 	Mega
 },
 310:{
-    ,
+    Normal,
 	Mega
 },
 315:{
@@ -345,7 +345,7 @@
 	Female
 },
 319:{
-    ,
+    Normal,
 	Mega
 },
 322:{
@@ -362,7 +362,7 @@
 	Female
 },
 334:{
-    ,
+    Normal,
 	Mega
 },
 350:{
@@ -370,21 +370,21 @@
 	Female
 },
 351:{
-	Normal,
+	 Normal,
 	Rainy,
 	Snowy,
 	Sunny
 },
 354:{
-    ,
+    Normal,
 	Mega
 },
 359:{
-    ,
+    Normal,
 	Mega
 },
 362:{
-    ,
+    Normal,
 	Mega
 },
 369:{
@@ -392,35 +392,35 @@
 	Female
 },
 373:{
-    ,
+    Normal,
 	Mega
 },
 376:{
-    ,
+    Normal,
 	Mega
 },
 380:{
-    ,
+    Normal,
 	Mega
 },
 381:{
-    ,
+    Normal,
 	Mega
 },
 382:{
-    ,
+    Normal,
 	Primal
 },
 383:{
-    ,
+    Normal,
 	Primal
 },
 384:{
-    ,
+    Normal,
 	Mega
 },
 386:{
-	Normal,
+	 Normal,
 	Attack,
 	Defense,
 	Speed
@@ -512,7 +512,7 @@
 	Female
 },
 428:{
-    ,
+    Normal,
 	Mega
 },
 443:{
@@ -529,7 +529,7 @@
 	Mega
 },
 448:{
-    ,
+    Normal,
 	Mega
 },
 449:{
@@ -582,11 +582,11 @@
 	Female
 },
 475:{
-    ,
+    Normal,
 	Mega
 },
 479:{
-	Normal,
+	 Normal,
 	Fan,
 	Frost,
 	Heat,
@@ -606,7 +606,7 @@
 	Female
 },
 531:{
-    ,
+    Normal,
 	Mega
 },
 550:{
@@ -650,7 +650,7 @@
 	Therian
 },
 646:{
-    Normal,
+     Normal,
 	Black,
 	White
 },
@@ -736,7 +736,7 @@
 	Active
 },
 719:{
-    ,
+    Normal,
 	Mega
 },
 720:{

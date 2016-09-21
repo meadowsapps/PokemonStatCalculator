@@ -1,34 +1,46 @@
 package com.meadowsapps.pkmn.ui.control;
 
-import com.meadowsapps.pkmn.PkmnUtils;
+import com.meadowsapps.pkmn.util.PkmnUtils;
 import com.meadowsapps.pkmn.data.DataTable;
-import com.meadowsapps.pkmn.ui.FxmlComponent;
-import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 
 import java.io.InputStream;
 
 /**
  * Created by Dylan on 9/15/16.
  */
-public class ModelViewer extends FxmlComponent<GridPane> {
+public class ModelViewer extends StackPane implements Initializable {
 
-    @FXML
-    private ImageView modelViewer;
+    private ImageView modelView;
 
-    @FXML
-    private ImageView backgroundImage;
+    private ImageView backgroundView;
+
+    public ModelViewer() {
+        initialize();
+    }
 
     @Override
     public void initialize() {
-        InputStream stream = PkmnUtils.getResourceAsStream("images/pokeball.gif");
-        Image backgroundImage = new Image(stream);
-        this.backgroundImage.setImage(backgroundImage);
-        double width = backgroundImage.getWidth();
-        double height = backgroundImage.getHeight();
-        setPrefSize(width, height);
+        getStyleClass().addAll("view");
+        setPadding(new Insets(5, 5, 5, 5));
+
+        {
+            backgroundView = new ImageView();
+            InputStream stream = PkmnUtils.getResourceAsStream("images/pokeball.gif");
+            Image backgroundImage = new Image(stream);
+            backgroundView.setImage(backgroundImage);
+            getChildren().add(backgroundView);
+            setPrefSize(backgroundImage.getWidth(), backgroundImage.getHeight());
+        }
+
+        {
+            modelView = new ImageView();
+            modelView.setSmooth(true);
+            getChildren().add(modelView);
+        }
     }
 
     public void setModel(int pkmnIndex, int formIndex) {
@@ -43,16 +55,16 @@ public class ModelViewer extends FxmlComponent<GridPane> {
         }
 
         String fileName = pkmnName.toLowerCase();
-        fileName += (formName != null && !formName.equals("")) ? "-" + formName.toLowerCase() : "";
+        fileName += (formName != null && !formName.equals("") && !formName.equals("Normal")) ? "-" + formName.toLowerCase() : "";
         fileName += ".gif";
 
         InputStream stream = PkmnUtils.getResourceAsStream("images/models/" + fileName);
         Image model = new Image(stream);
-        double bgWidth = backgroundImage.getImage().getWidth();
+        double bgWidth = backgroundView.getImage().getWidth();
         double width = (model.getWidth() > bgWidth) ? bgWidth : 0.0;
-        modelViewer.setPreserveRatio(width != 0.0);
-        modelViewer.setFitWidth(width);
-        modelViewer.setImage(model);
+        modelView.setPreserveRatio(width != 0.0);
+        modelView.setFitWidth(width);
+        modelView.setImage(model);
     }
 
 }

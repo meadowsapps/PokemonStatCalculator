@@ -1,19 +1,24 @@
 package com.meadowsapps.pkmn.ui.control;
 
-import com.meadowsapps.pkmn.ui.Component;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.scene.Node;
+import com.meadowsapps.pkmn.data.Stat;
+import javafx.beans.property.DoubleProperty;
+import javafx.geometry.VPos;
 import javafx.scene.control.Slider;
 import javafx.scene.control.Spinner;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.RowConstraints;
 
 /**
  * Created by Dylan on 9/15/16.
  */
-public class EvEditor extends Component {
+public class EvEditor extends GridPane implements Initializable {
+
+    /**
+     * The stat this editor is associated with
+     */
+    private Stat stat;
 
     /**
      * Slider control
@@ -26,22 +31,35 @@ public class EvEditor extends Component {
     private Spinner<Integer> spinner;
 
     /**
+     * Creates a new EvEditor instance
+     */
+    public EvEditor(Stat stat) {
+        this.stat = stat;
+        initialize();
+    }
+
+    /**
      * Initializes the components contained in the component
-     *
-     * @return the component layout
      */
     @Override
-    public Node initComponents() {
-        GridPane layoutPane = new GridPane();
-        layoutPane.setGridLinesVisible(false);
-        layoutPane.setHgap(10);
-        layoutPane.setVgap(10);
+    public void initialize() {
+        setGridLinesVisible(false);
+        setHgap(10);
+        setVgap(10);
+
+        RowConstraints rowConstraints = new RowConstraints();
+        rowConstraints.setValignment(VPos.CENTER);
+        rowConstraints.setVgrow(Priority.ALWAYS);
+        rowConstraints.setFillHeight(true);
+        getRowConstraints().add(rowConstraints);
 
         // Spinner
         {
-            ColumnConstraints spinnerColumn = new ColumnConstraints();
-            spinnerColumn.setPercentWidth(30);
-            layoutPane.getColumnConstraints().add(spinnerColumn);
+            ColumnConstraints constraints = new ColumnConstraints();
+            constraints.setHgrow(Priority.NEVER);
+            constraints.setMinWidth(10);
+            constraints.setPrefWidth(100);
+            getColumnConstraints().add(constraints);
 
             spinner = new Spinner<>(0, 255, 0);
             spinner.valueProperty().addListener((observable, oldValue, newValue) -> {
@@ -50,15 +68,16 @@ public class EvEditor extends Component {
                 }
             });
             spinner.setEditable(true);
-            layoutPane.add(spinner, 0, 0);
+            add(spinner, 0, 0);
         }
 
         // Slider
         {
-            ColumnConstraints sliderColumn = new ColumnConstraints();
-            sliderColumn.setPercentWidth(70);
-            sliderColumn.setHgrow(Priority.ALWAYS);
-            layoutPane.getColumnConstraints().add(sliderColumn);
+            ColumnConstraints constraints = new ColumnConstraints();
+            constraints.setHgrow(Priority.SOMETIMES);
+            constraints.setMinWidth(10);
+            constraints.setPrefWidth(100);
+            getColumnConstraints().add(constraints);
 
             slider = new Slider(0, 255, 0);
             slider.valueProperty().addListener((observable, oldValue, newValue) -> {
@@ -67,9 +86,8 @@ public class EvEditor extends Component {
                 }
             });
             slider.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-            layoutPane.add(slider, 1, 0);
+            add(slider, 1, 0);
         }
-        return layoutPane;
     }
 
     /**
@@ -82,29 +100,12 @@ public class EvEditor extends Component {
     }
 
     /**
-     * Adds the specified <code>ChangeListener</code> to the slider and spinner controls
+     * Gets the value property from the slider
      *
-     * @param listener the listener to add to the controls
+     * @return the slider's value property
      */
-    public void addChangeListener(ChangeListener listener) {
-        slider.valueProperty().addListener(listener);
-    }
-
-    /**
-     * Removes the specified <code>ChangeListener</code> from the slider and spinner controls
-     *
-     * @param listener the listener to remove from the controls
-     */
-    public void removeChangeListener(ChangeListener listener) {
-        slider.valueProperty().removeListener(listener);
-    }
-
-    public void bind(IntegerProperty property) {
-        slider.valueProperty().bindBidirectional(property);
-    }
-
-    public void unbind(IntegerProperty property) {
-        slider.valueProperty().unbindBidirectional(property);
+    public DoubleProperty valueProperty() {
+        return slider.valueProperty();
     }
 
     /**
@@ -124,5 +125,14 @@ public class EvEditor extends Component {
     public void setValue(int value) {
         slider.setValue(value);
         spinner.getValueFactory().setValue(value);
+    }
+
+    /**
+     * Gets the stat this editor is associated with
+     *
+     * @return the associated stat
+     */
+    public Stat getStat() {
+        return stat;
     }
 }

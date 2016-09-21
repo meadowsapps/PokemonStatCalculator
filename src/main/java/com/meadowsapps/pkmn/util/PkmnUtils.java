@@ -1,4 +1,4 @@
-package com.meadowsapps.pkmn;
+package com.meadowsapps.pkmn.util;
 
 import java.io.InputStream;
 
@@ -10,4 +10,5 @@ public class PkmnUtils {
     public static InputStream getResourceAsStream(String path) {
         return PkmnUtils.class.getClassLoader().getResourceAsStream(path);
     }
+
 }
