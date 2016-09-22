@@ -2,7 +2,6 @@ package com.meadowsapps.pkmn;
 
 import com.meadowsapps.pkmn.ui.StatCalculatorView;
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
