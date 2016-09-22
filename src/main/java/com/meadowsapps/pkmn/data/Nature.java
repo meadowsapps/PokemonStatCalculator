@@ -31,7 +31,7 @@ public enum Nature {
     Timid;
 
     public Double[] getModifiers() {
-        return DataTable.getNatureTable().getModifier(this);
+        return DataTable.getNatureTable().getModifiers(this);
     }
 
 }

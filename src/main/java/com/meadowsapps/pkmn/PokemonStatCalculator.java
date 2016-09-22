@@ -2,6 +2,7 @@ package com.meadowsapps.pkmn;
 
 import com.meadowsapps.pkmn.ui.StatCalculatorView;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -15,7 +16,7 @@ import java.net.URL;
 public class PokemonStatCalculator extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(final Stage primaryStage) throws Exception {
         URL fxml = getClass().getClassLoader().getResource("fxml/StatCalculatorView.fxml");
         FXMLLoader loader = new FXMLLoader(fxml);
         AnchorPane view = (AnchorPane) loader.load();
@@ -26,6 +27,14 @@ public class PokemonStatCalculator extends Application {
         scene.getStylesheets().add(style.toExternalForm());
 
         primaryStage.setScene(scene);
+
+        double width = 1120;
+        double height = 775;
+        primaryStage.setWidth(width);
+        primaryStage.setHeight(height);
+        primaryStage.setMinWidth(width);
+        primaryStage.setMaxHeight(height);
+
         primaryStage.setTitle("Pokemon Stat Calculator");
         primaryStage.show();
     }

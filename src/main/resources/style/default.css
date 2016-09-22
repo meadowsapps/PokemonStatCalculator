@@ -7,3 +7,7 @@
 	-fx-font-size: 15;
 	-fx-font-weight: bold;
 }
+
+.value {
+    -fx-font-weight: bold;
+}

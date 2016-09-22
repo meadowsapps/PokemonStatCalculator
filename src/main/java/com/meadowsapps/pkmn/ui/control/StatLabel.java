@@ -12,6 +12,7 @@ public class StatLabel extends Label {
 
     public StatLabel(Stat stat) {
         this.stat = stat;
+        getStyleClass().add("value");
     }
 
     public int getValue() {

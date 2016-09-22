@@ -1,6 +1,7 @@
 package com.meadowsapps.pkmn.ui;
 
 import com.meadowsapps.pkmn.data.DataTable;
+import com.meadowsapps.pkmn.data.Nature;
 import com.meadowsapps.pkmn.data.Stat;
 import com.meadowsapps.pkmn.ui.control.*;
 import javafx.fxml.FXML;
@@ -74,6 +75,9 @@ public class StatCalculatorView implements Initializable {
     private Label baseStatTotalLbl;
 
     @FXML
+    private GridPane resultsPane;
+
+    @FXML
     private GridPane evPane;
 
     @FXML
@@ -97,7 +101,7 @@ public class StatCalculatorView implements Initializable {
     @FXML
     @Override
     public void initialize() {
-        boolean showGrid = true;
+        boolean showGrid = false;
         infoPane.setGridLinesVisible(showGrid);
         baseStatPane.setGridLinesVisible(showGrid);
         evPane.setGridLinesVisible(showGrid);
@@ -109,6 +113,7 @@ public class StatCalculatorView implements Initializable {
             pokemonField.valueProperty().addListener((observable, oldValue, newValue) -> onPokemonChanged());
 
             natureField.getItems().addAll(DataTable.getNatureTable().getNatures());
+            natureField.getSelectionModel().selectFirst();
             natureField.valueProperty().addListener((observable, oldValue, newValue) -> onNatureChanged());
 
             levelField.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 50));
@@ -116,6 +121,7 @@ public class StatCalculatorView implements Initializable {
 
             formField.getItems().setAll(new String[0]);
             formField.valueProperty().addListener((observable, oldValue, newValue) -> onFormChanged());
+            formField.setDisable(true);
 
             modelViewer = new ModelViewer();
             infoPane.add(modelViewer, 0, 0, 2, 4);
@@ -166,6 +172,9 @@ public class StatCalculatorView implements Initializable {
                 // Stat Label
                 {
                     StatLabel label = new StatLabel(stat);
+                    GridPane.setConstraints(label, 1, stat.ordinal(), 1, 1,
+                            HPos.LEFT, VPos.CENTER, Priority.NEVER, Priority.ALWAYS);
+                    resultsPane.getChildren().add(label);
                     resultLbls[stat.ordinal()] = label;
                 }
             }
@@ -176,19 +185,21 @@ public class StatCalculatorView implements Initializable {
         updateForms();
         updateModel();
         updateBaseStats();
+        updateStats();
     }
 
     private void onNatureChanged() {
-
+        updateStats();
     }
 
     private void onLevelChanged() {
-
+        updateStats();
     }
 
     private void onFormChanged() {
         updateModel();
         updateBaseStats();
+        updateStats();
     }
 
     private void onEvChanged(EvEditor editor) {
@@ -231,12 +242,29 @@ public class StatCalculatorView implements Initializable {
         baseStatTotalLbl.setText(Integer.toString(sum));
     }
 
-    private void updateStat(Stat stat) {
-        int value = 0;
-        if (stat == Stat.HP) {
-        } else {
+    private void updateStats() {
+        for (Stat stat : Stat.values()) {
+            updateStat(stat);
         }
-        resultLbls[stat.ordinal()].setValue(value);
+    }
+
+    private void updateStat(Stat stat) {
+        if (pokemonField.getSelectionModel().getSelectedIndex() != -1) {
+            int baseStat = baseStats[stat.ordinal()].getValue();
+            int iv = ivEditors[stat.ordinal()].getValue();
+            int ev = evEditors[stat.ordinal()].getValue();
+            int level = (Integer) levelField.getValueFactory().getValue();
+
+            int value = 0;
+            if (stat == Stat.HP) {
+                value = (int) Math.floor(((2 * baseStat + iv + Math.floor(ev / 4)) * level) / 100) + level + 10;
+            } else {
+                Nature nature = Nature.valueOf((String) natureField.getSelectionModel().getSelectedItem());
+                double modifier = DataTable.getNatureTable().getModifier(nature, stat);
+                value = (int) Math.floor((Math.floor(((2 * baseStat + iv + Math.floor(ev / 4)) * level) / 100) + 5) * modifier);
+            }
+            resultLbls[stat.ordinal()].setValue(value);
+        }
     }
 
 }

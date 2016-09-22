@@ -224,8 +224,12 @@ public abstract class DataTable {
             return naturesList.toArray(new String[0]);
         }
 
-        public Double[] getModifier(Nature nature) {
+        public Double[] getModifiers(Nature nature) {
             return natures.get(nature.name());
+        }
+
+        public Double getModifier(Nature nature, Stat stat) {
+            return getModifiers(nature)[stat.ordinal() - 1];
         }
     }
 

@@ -28,13 +28,10 @@ public class BaseStatBar extends GridPane implements Initializable {
 
     @Override
     public void initialize() {
-        setGridLinesVisible(true);
+        boolean showGrid = false;
+        setGridLinesVisible(showGrid);
         setHgap(10);
         setVgap(10);
-
-        RowConstraints row = new RowConstraints();
-        row.setValignment(VPos.CENTER);
-        getRowConstraints().add(row);
 
         Text text = new Text("000");
         Bounds bounds = text.getLayoutBounds();
@@ -43,22 +40,20 @@ public class BaseStatBar extends GridPane implements Initializable {
         // Label
         {
             ColumnConstraints constraints = new ColumnConstraints();
-            constraints.setHgrow(Priority.NEVER);
-            constraints.setHalignment(HPos.RIGHT);
             constraints.setMinWidth(10);
             constraints.setMaxWidth(bounds.getWidth());
             constraints.setPrefWidth(bounds.getWidth());
             getColumnConstraints().add(constraints);
 
             label = new Label();
-            add(label, 0, 0);
+            GridPane.setConstraints(label, 0, 0, 1, 1,
+                    HPos.RIGHT, VPos.CENTER, Priority.NEVER, Priority.ALWAYS);
+            getChildren().add(label);
         }
 
         // Bar
         {
             ColumnConstraints constraints = new ColumnConstraints();
-            constraints.setHgrow(Priority.SOMETIMES);
-            constraints.setHalignment(HPos.LEFT);
             constraints.setMinWidth(10);
             constraints.setPrefWidth(100);
             getColumnConstraints().add(constraints);
@@ -74,7 +69,10 @@ public class BaseStatBar extends GridPane implements Initializable {
             barPane.widthProperty().addListener(sizeListener);
             barPane.heightProperty().addListener(sizeListener);
             barPane.getChildren().add(bar);
-            add(barPane, 1, 0);
+            GridPane.setConstraints(barPane, 1, 0, 1, 1,
+                    HPos.LEFT, VPos.CENTER, Priority.ALWAYS, Priority.ALWAYS);
+            getChildren().add(barPane);
+//            add(barPane, 1, 0);
         }
     }
 
