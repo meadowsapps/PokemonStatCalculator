@@ -11,6 +11,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 
@@ -96,7 +97,7 @@ public class StatCalculatorView implements Initializable {
     @FXML
     @Override
     public void initialize() {
-        boolean showGrid = false;
+        boolean showGrid = true;
         infoPane.setGridLinesVisible(showGrid);
         baseStatPane.setGridLinesVisible(showGrid);
         evPane.setGridLinesVisible(showGrid);
@@ -131,6 +132,7 @@ public class StatCalculatorView implements Initializable {
             // BaseStatView
             {
                 BaseStatBar bar = new BaseStatBar(stat.getFill());
+                bar.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
                 GridPane.setConstraints(bar, 1, stat.ordinal(), 1, 1,
                         HPos.LEFT, VPos.CENTER, Priority.ALWAYS, Priority.ALWAYS);
                 baseStatPane.getChildren().add(bar);

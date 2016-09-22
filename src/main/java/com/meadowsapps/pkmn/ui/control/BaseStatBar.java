@@ -3,11 +3,9 @@ package com.meadowsapps.pkmn.ui.control;
 import javafx.beans.value.ChangeListener;
 import javafx.geometry.Bounds;
 import javafx.geometry.HPos;
+import javafx.geometry.VPos;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
@@ -30,9 +28,13 @@ public class BaseStatBar extends GridPane implements Initializable {
 
     @Override
     public void initialize() {
-        setGridLinesVisible(false);
+        setGridLinesVisible(true);
         setHgap(10);
         setVgap(10);
+
+        RowConstraints row = new RowConstraints();
+        row.setValignment(VPos.CENTER);
+        getRowConstraints().add(row);
 
         Text text = new Text("000");
         Bounds bounds = text.getLayoutBounds();
